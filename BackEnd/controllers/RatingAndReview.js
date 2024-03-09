@@ -80,11 +80,41 @@ exports.getAverageRating = async (req,res) => {
         //if no rating exist
         return res.status(200).json({
             success:true,
-            message:"No Rating,So Avg is 0"
+            message:"No Rating,So Avg is 0",
+            averageRating:0
         })
     }
     catch(error){
 
     }
 }
-//get All Rating
+
+//get All Rating & Review
+exports.getAllRatingAndReview = async (req,res) => {
+    try{
+        const allReviews = await RatingAndReview.find({})
+                                                .sort({rating:"desc"})
+                                                .populate({
+                                                    path:"user",
+                                                    select:"firstName lastName email image"
+                                                })
+                                                .populate({
+                                                    path:"course",
+                                                    select:"courseName"
+                                                })
+                                                .exec();
+        return res.status(200).json({
+            success:true,
+            message:"All reviews fetched successfully",
+            data:allReviews
+        });
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"No Ratings Found"
+        })
+
+    }
+}
