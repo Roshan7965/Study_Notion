@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {auth} = require("../controllers/Auth");
+const {auth} = require("../middlewares/authorization");
 const {updateProfile,
     deleteAccount,
     getAllUserDetails,updateDisplayPicture,
