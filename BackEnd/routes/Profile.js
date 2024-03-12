@@ -12,7 +12,7 @@ const {updateProfile,
 // ********************************************************************************************************
 
 // Delet User Account
-router.delete("/deleteProfile", deleteAccount)
+router.delete("/deleteProfile",auth, deleteAccount)
 //Update User Profile
 router.put("/updateProfile", auth, updateProfile)
 router.get("/getUserDetails", auth, getAllUserDetails)

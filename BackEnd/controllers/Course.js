@@ -154,11 +154,11 @@ exports.getAllCourses = async (req, res) => {
 exports.getCourseDetails = async (req,res) => {
 	try{
 		//courseId
-		const courseId = req.body;
+		const {courseId} = req.body;
 		//find course Details
 		const courseDetails = await Course.find({_id:courseId}).populate({path:"instructor",populate:{path:"additionalDetails"}}
 																		).populate("category")
-																		.populate("ratingAndReviews")
+																		//.populate("ratingAndReviews")
 																		.populate({
 																			path:"courseContent",
 																			populate:{
@@ -176,7 +176,8 @@ exports.getCourseDetails = async (req,res) => {
 
 		return res.status(404).json({
 			success:true,
-			message:"Course Details Fetched Successfully"
+			message:"Course Details Fetched Successfully",
+			data:courseDetails,
 		})
 	}
 	catch(error){

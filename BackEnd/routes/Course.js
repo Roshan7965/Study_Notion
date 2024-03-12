@@ -40,7 +40,7 @@ router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
 //Get all Registered Course
 router.get("/getAllCourses",getAllCourses);
 //Get Details for a specific Course
-router.get("/getCourseDetails",getCourseDetails)
+router.post("/getCourseDetails",getCourseDetails)
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)

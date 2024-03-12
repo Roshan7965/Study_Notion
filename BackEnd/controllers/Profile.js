@@ -4,12 +4,25 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 // Method for updating a profile
 exports.updateProfile = async (req, res) => {
 	try {
-		const { dateOfBirth = "", about = "", contactNumber } = req.body;
+		const { dateOfBirth = "", about = "", contactNumber = "" } = req.body;
 		const id = req.user.id;
 
-		// Find the profile by id
+		// Find the profile by user id
 		const userDetails = await User.findById(id);
-		const profile = await Profile.findById(userDetails.additionalDetails);
+
+		if (!userDetails) {
+			return res.status(404).json({
+				success: false,
+				error: "User not found",
+			});
+		}
+
+		// Find or create the profile
+		let profile = await Profile.findById(userDetails.additionalDetails);
+		if (!profile) {
+			profile = new Profile();
+			// Optionally set any default values for the new profile here
+		}
 
 		// Update the profile fields
 		profile.dateOfBirth = dateOfBirth;
@@ -49,10 +62,10 @@ exports.deleteAccount = async (req, res) => {
 			});
 		}
 		// Delete Assosiated Profile with the User
-		await Profile.findByIdAndDelete({ _id: user.userDetails });
+		await Profile.findByIdAndDelete({ _id: user.additionalDetails });
 		// TODO: Unenroll User From All the Enrolled Courses
 		// Now Delete User
-		await user.findByIdAndDelete({ _id: id });
+		await User.findByIdAndDelete({ _id: id });
 		res.status(200).json({
 			success: true,
 			message: "User deleted successfully",
