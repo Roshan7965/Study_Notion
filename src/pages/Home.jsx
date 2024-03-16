@@ -6,6 +6,9 @@ import CTAButton from '../components/core/HomePage/Button'
 import CodeBlocks from '../components/core/HomePage/CodeBlocks'
 import TimelineSection from '../components/core/HomePage/TimelineSection'
 import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection'
+import InstructorSection from '../components/core/HomePage/InstructorSection'
+import ExploreMore from '../components/core/HomePage/ExploreMore'
+import Footer from '../components/common/Footer'
 import Banner from '../assets/Images/banner.mp4'
 // import Office from '../assets/Images/boxoffice.png'
 
@@ -81,7 +84,7 @@ const Home = () => {
             {/* Code Section - 2 */}
             <div>
                 <CodeBlocks
-                    position={"lg:flex-row-reverse mr-[-325px]"}
+                    position={"lg:flex-row-reverse"}
                     heading={
                         <div className="w-[100%] text-4xl font-semibold lg:w-[40%] ">Start
                             <HighlightText text={"coding in seconds"} />
@@ -111,8 +114,13 @@ const Home = () => {
                 />
             </div>
 
+            <div>
+                <ExploreMore/>
+            </div>
+
 
         </div>
+
         {/*Section - 2 */}
        <div className='bg-pure-greys-5 text-richblack-700'>
             <div className='homepage_bg h-[310px]'>
@@ -161,8 +169,16 @@ const Home = () => {
             
 
        </div>
+
         {/*Section - 3 */}
+        <div className='w-11/12  mx-auto max-w-maxContent flex flex-col items-center justify-between gap-8 bg-richblack-900 text-white'>
+            <InstructorSection/>
+            <h2 className='text-center text-4xl font-semibold mt-10'>Review From Learners</h2>
+            {/* Review Slider */}
+        </div>
+
         {/*Footer */}
+        <Footer/>
 
     </div>
   )
