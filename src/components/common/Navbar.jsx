@@ -9,7 +9,7 @@ import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
 import { useState } from 'react'
-import {IoIosArrowDropdownCircle} from "react-icons/io"
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 // const subLinks = [
 //     {
@@ -72,7 +72,7 @@ const Navbar = () => {
                         link.title === "Catalog" ? (
                             <div className='relative flex items-center gap-2 group'>
                                 <p>{link.title}</p>
-                                <IoIosArrowDropdownCircle/>
+                                <MdKeyboardArrowDown/>
 
                                 <div className='invisible absolute left-[50%]
                                     translate-x-[-50%] translate-y-[80%]
