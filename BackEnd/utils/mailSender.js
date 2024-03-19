@@ -8,17 +8,20 @@ const mailSender = async (email, title, body) => {
                 auth:{
                     user: process.env.MAIL_USER,
                     pass: process.env.MAIL_PASS,
+                },
+                tls: {
+                    rejectUnauthorized: false
                 }
             })
-
+            console.log("vfghszdfghhhjjk")
 
             let info = await transporter.sendMail({
-                from: 'StudyNotion || From Bhushan Patil',
+                from: 'StudyNotion || From Bhushan Patil ',
                 to:`${email}`,
                 subject: `${title}`,
                 html: `${body}`,
             })
-            console.log(info);
+            console.log("Info->",info);
             return info;
     }
     catch(error) {
