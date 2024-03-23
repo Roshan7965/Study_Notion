@@ -11,22 +11,23 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import Error from "./pages/Error"
+import Settings from "../src/components/core/Dashboard/Settings/index"
 
 function App() {
   return (
    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
     <Navbar/>
     <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route
-          path="signup"
-          element={
-            <OpenRoute>
-              <Signup />
-            </OpenRoute>
-          }
-        />
-    <Route
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      
+       {/* Open Route - for Only Non Logged in User */}
+       <Route
           path="login"
           element={
             <OpenRoute>
@@ -34,7 +35,7 @@ function App() {
             </OpenRoute>
           }
         />
-      <Route
+        <Route
           path="forgot-password"
           element={
             <OpenRoute>
@@ -51,6 +52,14 @@ function App() {
           }
         />
         <Route
+          path="signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        />
+        <Route
           path="verify-email"
           element={
             <OpenRoute>
@@ -58,21 +67,23 @@ function App() {
             </OpenRoute>
           }
         />
+
+        {/* Private Route - for Only Logged in User */}
         <Route
-          path="about"
           element={
-            <OpenRoute>
-              <About />
-            </OpenRoute>
+            <PrivateRoute>
+              <Dashboard/>
+            </PrivateRoute>
           }
-        />
+        >
+            {/* Route for all users */}
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/Settings" element={<Settings />} />
+        </Route>
+        
         <Route
-          path="contact"
-          element={
-            <OpenRoute>
-              <Contact />
-            </OpenRoute>
-          }
+          path="*"
+          element={<Error />}
         />
     </Routes>
 
