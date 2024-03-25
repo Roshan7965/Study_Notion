@@ -132,9 +132,9 @@ exports.login = async (req, res) => {
 		// If user not found with provided email
 		if (!user) {
 			// Return 401 Unauthorized status code with error message
-			return res.status(401).json({
+			return res.status(404).json({
 				success: false,
-				message: `User is not Registered with Us Please SignUp to Continue`,
+				message: `User is not Registered,SignUp to Continue`,
 			});
 		}
 
