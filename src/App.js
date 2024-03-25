@@ -1,8 +1,14 @@
 import "./App.css";
 import {Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+
+import { setUserReal } from "./slices/profileSlice";
 import Home from "./pages/Home"
 import Navbar from "./components/common/Navbar"
 import OpenRoute from "./components/core/Auth/OpenRoute"
+import { ACCOUNT_TYPE } from "./utils/constants";
 
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
@@ -16,8 +22,27 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Error from "./pages/Error"
 import Settings from "../src/components/core/Dashboard/Settings/index"
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+import Cart from "./components/core/Dashboard/Cart/Index";
+import Instructor from "./components/core/Dashboard/Instructor";
+import MyCourses from "./components/core/Dashboard/MyCourses";
 
 function App() {
+  const { token } = useSelector((state) => state.auth)
+  const [userData, setUserData] = useState(null)  
+  const dispatch = useDispatch();
+  useEffect(()=> {
+    const setData = async() => {
+      const decodedToken = await jwtDecode(token)
+      if(decodedToken !== userData){
+        setUserData(decodedToken)
+        dispatch(setUserReal(decodedToken))
+      }
+    }
+    if(token){
+      setData();
+    }
+  }, [token])
   return (
    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
     <Navbar/>
@@ -69,16 +94,29 @@ function App() {
         />
 
         {/* Private Route - for Only Logged in User */}
-        <Route
-          element={
-            <PrivateRoute>
-              <Dashboard/>
-            </PrivateRoute>
-          }
-        >
+        <Route element={<PrivateRoute> <Dashboard/></PrivateRoute>}>
             {/* Route for all users */}
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/Settings" element={<Settings />} />
+            <Route path="dashboard/my-profile" element={<MyProfile />} />
+            <Route path="dashboard/Settings" element={<Settings />} />
+            {/* Routes for Student */}
+            {
+              userData?.accountType === ACCOUNT_TYPE.STUDENT && (
+                <>
+                  <Route path="dashboard/cart" element={<Cart />} />
+                  <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+                </>
+              )
+            }
+            {/* Routes for Instructor */}
+            {
+              userData?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+                <>
+                <Route path="/dashboard/instructor" element={<Instructor />} />
+                <Route path="/dashboard/my-courses" element={<MyCourses />} />
+                </>
+              )
+            }
+
         </Route>
         
         <Route
