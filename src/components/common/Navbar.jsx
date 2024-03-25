@@ -53,7 +53,7 @@ const Navbar = () => {
 	};
 
   return (
-    <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700'>
+    <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 bg-richblack-800 transition-all duration-200'>
       <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
                 {/* Logo */}
 				<Link to="/">
@@ -61,7 +61,7 @@ const Navbar = () => {
 				</Link>
 
             {/* Nav Links */}
-            <nav className="hidden sm:block">
+            <nav className="hidden md:block">
                 <ul className='flex gap-x-6 text-richblack-25'>
                 {
                     NavbarLinks.map( (link, index) => (
@@ -121,7 +121,7 @@ const Navbar = () => {
 
 
             {/* Login/SignUp/Dashboard */}
-            <div className="hidden items-center gap-x-4 sm:flex">
+            <div className="hidden items-center gap-x-4 md:flex">
 
                 {
                     user && user?.accountType !== "Instructor" && (
@@ -163,7 +163,7 @@ const Navbar = () => {
 
             {/* Mobile nav bar */}
 		    <div
-					className="sm:hidden flex flex-1 justify-end items-center text-white"
+					className="md:hidden flex flex-1 justify-end items-center text-white"
 					onClick={() => setToggle(!toggle)}>
 					{!toggle ? (
 						<div className="object-contain cursor-pointer">
@@ -218,7 +218,7 @@ const Navbar = () => {
 														<div
 															className={`${
 																!toggleSub ? "hidden" : "block"
-															} sm:hidden border p-2 flex-col rounded-lg text-richblack-5 bg-richblack-900`}>
+															} md:hidden border p-2 flex-col rounded-lg text-richblack-5 bg-richblack-900`}>
 															{loading ? (
 																<p className="text-center">Loading...</p>
 															) : subLinks?.length ? (
@@ -285,7 +285,7 @@ const Navbar = () => {
 														<div
 															className={`${
 																!toggleSub ? "hidden" : "block"
-															} sm:hidden border p-2 flex-col rounded-lg text-richblack-5 bg-richblack-900`}>
+															} md:hidden border p-2 flex-col rounded-lg text-richblack-5 bg-richblack-900`}>
 															{loading ? (
 																<p className="text-center">Loading...</p>
 															) : subLinks?.length ? (
