@@ -1,8 +1,11 @@
 const express = require("express")
 const router = express.Router();
 
+const { addToCart, removeFromCart } = require("../controllers/Cart")
+
+
 //Import Course controller
-const {createCourse,getAllCourses,getCourseDetails} = require("../controllers/Course");
+const {createCourse,getAllCourses,getCourseDetails,getInstructorCourses,editCourse,deleteCourse} = require("../controllers/Course");
 
 //Import Category controller
 const {createCategory,showAllCategories,categoryPageDetails} = require("../controllers/Category");
@@ -41,6 +44,11 @@ router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
 router.get("/getAllCourses",getAllCourses);
 //Get Details for a specific Course
 router.post("/getCourseDetails",getCourseDetails)
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+router.post("/editCourse", auth, isInstructor, editCourse)
+router.delete("/deleteCourse", auth, isInstructor, deleteCourse)
+
+
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)
@@ -60,6 +68,10 @@ router.post("/getCategoryPageDetails",categoryPageDetails);
 router.post("/createRating",auth,isStudent,createRating);
 router.get("/getAverageRating",getAverageRating);
 router.get("/getReviews",getAllRatingAndReview);
+
+
+router.post("/addToCart", auth, isStudent, addToCart)
+router.post("/removeFromCart", auth, isStudent, removeFromCart)
 
 
 module.exports = router
