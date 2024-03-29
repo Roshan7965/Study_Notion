@@ -1,8 +1,10 @@
 const Course = require("../models/Course");
 const Category = require("../models/Category");
+const Section = require("../models/Section");
+const SubSection = require("../models/Subsection")
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
-// Function to create a new course
+
 //create course
 exports.createCourse = async (req, res) => {
 	try{
@@ -223,8 +225,9 @@ exports.getInstructorCourses = async (req, res) => {
 		error: error.message,
 	  })
 	}
-  }
-  // Delete the Course
+}
+
+// Delete the Course
   exports.deleteCourse = async (req, res) => {
 	try {
 	  const { courseId } = req.body
@@ -274,10 +277,10 @@ exports.getInstructorCourses = async (req, res) => {
 		error: error.message,
 	  })
 	}
-  }
+}
   
-  //Edit Course
-  exports.editCourse = async (req, res) => {
+//Edit Course
+exports.editCourse = async (req, res) => {
 	try {
 	  const { courseId } = req.body
 	  const updates = req.body
@@ -365,4 +368,4 @@ exports.getInstructorCourses = async (req, res) => {
 		error: error.message,
 	  })
 	}
-  }
+}
