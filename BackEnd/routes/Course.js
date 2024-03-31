@@ -8,7 +8,7 @@ const { addToCart, removeFromCart } = require("../controllers/Cart")
 const {createCourse,getAllCourses,getCourseDetails,getInstructorCourses,editCourse,deleteCourse,getFullCourseDetails} = require("../controllers/Course");
 
 //Import Category controller
-const {createCategory,showAllCategories,categoryPageDetails} = require("../controllers/Category");
+const {createCategory,showAllCategory,categoryPageDetails} = require("../controllers/Category");
 
 //Import Section Controllers
 const {createSection,updateSection,deleteSection} = require("../controllers/Section");
@@ -59,7 +59,7 @@ router.post("/getFullCourseDetails", auth, getFullCourseDetails)
 // Category can Only be Created by Admin
 // TODO: Put IsAdmin Middleware here
 router.post("/createCategory",auth,isAdmin,createCategory);
-router.get("/showAllCategories",showAllCategories);
+router.get("/showAllCategories",showAllCategory);
 router.post("/getCategoryPageDetails",categoryPageDetails);
 
 
