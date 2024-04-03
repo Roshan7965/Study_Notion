@@ -142,43 +142,57 @@ exports.getAllCourses = async (req, res) => {
 };
 
 //getCourseDetails
-exports.getCourseDetails = async (req,res) => {
+exports.getCourseDetails = async (req, res) => {
 	try{
-		//courseId
-		const {courseId} = req.body;
-		//find course Details
-		const courseDetails = await Course.find({_id:courseId}).populate({path:"instructor",populate:{path:"additionalDetails"}}
-																		).populate("category")
-																		//.populate("ratingAndReviews")
-																		.populate({
-																			path:"courseContent",
-																			populate:{
-																				path:"subSection"
-																			}
-																		})
-																		.exec();
-		//validation
-		if(!courseDetails){
-			return res.status(404).json({
-				success:false,
-				message:`Course Not Found with ${courseId}`,
-			})
-		}
-
+	  //Fetch id
+	  const {courseId}=req.body;
+  
+	  if(!courseId){
+		return res.status(400).json({
+		  success:false,
+		  message: "Please provide course id"
+		});
+	  }
+  
+	  //Find course details
+	  const courseDetails = await Course.findById({_id:courseId})
+										.populate({path:"instructor", populate:{path:"additionalDetails"}})
+										.populate("category")
+										.populate({path:"courseContent", populate:{path:"subSection"}})
+										.exec();
+  
+	  //Validations
+	  if(!courseDetails){
 		return res.status(404).json({
-			success:true,
-			message:"Course Details Fetched Successfully",
-			data:courseDetails,
+		  success:false,
+		  message: "No course found"
+		});
+	  }
+  
+	  let totalDurationInSeconds = 0
+	  courseDetails.courseContent.forEach((content) => {
+		content.subSection.forEach((subSection) => {
+		  const timeDurationInSeconds = parseInt(subSection.timeDuration)
+		  totalDurationInSeconds += timeDurationInSeconds
 		})
+	  })
+  
+	  const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+  
+	  //Returing response
+	  return res.status(200).json({
+		success:true,
+		message:"Course Details fetched successfully",
+		data:{courseDetails, totalDuration},
+	  });
+	} catch(err){
+	  return res.status(500).json({
+		success:false,
+		message: "Failed to get course details"
+	  });
 	}
-	catch(error){
-		console.log(error)
-		res.status(500).json({
-			success:false,
-			message:"Internal Server Error,Failed to fetch Course details",
-		})
-	}
-}
+	
+  }
 
 //Get Full Details of Course
 exports.getFullCourseDetails = async (req, res) => {
