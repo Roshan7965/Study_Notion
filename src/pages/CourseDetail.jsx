@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { fetchCourseDetails } from "../services/operations/courseDetailAPI"
 import GetAvgRating from "../utils/avgRating"
 import Error from "./Error"
-import { BuyCourse, purchaseDirectly } from "../services/operations/studentFeaturesAPI"
+import { buyCourse } from "../services/operations/studentFeaturesAPI"
 import ConfirmationModal from "../components/common/ConfirmationModal"
 import { formatDate } from "../services/formatDate"
 import RatingStars from "../components/common/RatingStars"
@@ -112,14 +112,15 @@ const CourseDetails = () => {
   const handleBuyCourse = async () => {
     if (token) {
       // await BuyCourse(token, [courseId], user, navigate, dispatch)
-      setConfirmationModal({
-        text1: "Click on buy to confirm",
-        text2: "Required money will be deducted!",
-        btn1Text: "Buy",
-        btn2Text: "Cancel",
-        btn1Handler: () => purchaseDirectly({courseId}, token, navigate, dispatch),
-        btn2Handler: () => setConfirmationModal(null),
-      })
+      // setConfirmationModal({
+      //   text1: "Click on buy to confirm",
+      //   text2: "Required money will be deducted!",
+      //   btn1Text: "Buy",
+      //   btn2Text: "Cancel",
+      //   btn1Handler: () => purchaseDirectly({courseId}, token, navigate, dispatch),
+      //   btn2Handler: () => setConfirmationModal(null),
+      // })
+      buyCourse(token, [courseId], user, navigate, dispatch);
       return
     }
     setConfirmationModal({
