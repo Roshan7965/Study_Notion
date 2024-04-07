@@ -29,6 +29,7 @@ import MyCourses from "./components/core/Dashboard/MyCourses";
 import AddCourse from "./components/core/Dashboard/AddCourse/AddCourse";
 import EditCourse from "./components/core/Dashboard/EditCourse/EditCourse";
 import Catalog from "./pages/Catalog";
+import CourseDetails from "./pages/CourseDetail";
 
 function App() {
   const { token } = useSelector((state) => state.auth)
@@ -54,6 +55,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/catalog/:catalogName" element={<Catalog />} />
+      <Route path="/courses/:courseId" element={<CourseDetails />} />
       
        {/* Open Route - for Only Non Logged in User */}
        <Route
