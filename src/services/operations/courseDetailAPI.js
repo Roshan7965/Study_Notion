@@ -353,8 +353,8 @@ export const addCart = async (data, token) => {
     if (!response?.data?.success) {
       throw new Error("Could Not Add To Cart")
     }
-    console.log(response)
-    toast.success("Added To Cart")
+    // console.log(response)
+    // toast.success("Added To Cart")
     success = true
   } catch (error) {
     success = false
