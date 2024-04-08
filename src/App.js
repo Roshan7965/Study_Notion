@@ -30,6 +30,8 @@ import AddCourse from "./components/core/Dashboard/AddCourse/AddCourse";
 import EditCourse from "./components/core/Dashboard/EditCourse/EditCourse";
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetail";
+import ViewCourse from './pages/ViewCourse'
+import VideoDetails from './components/core/ViewCourse/VideoDetails' 
 
 function App() {
   const { token } = useSelector((state) => state.auth)
@@ -104,7 +106,11 @@ function App() {
             {/* Route for all users */}
             <Route path="dashboard/my-profile" element={<MyProfile />} />
             <Route path="dashboard/Settings" element={<Settings />} />
-            {/* Routes for Student */}
+
+
+             {/* ********************************************************************************************************
+                                                      ROUTES FOR STUDENT
+            ******************************************************************************************************** */}
             {
               userData?.accountType === ACCOUNT_TYPE.STUDENT && (
                 <>
@@ -113,7 +119,13 @@ function App() {
                 </>
               )
             }
-            {/* Routes for Instructor */}
+
+            
+
+
+            {/* ********************************************************************************************************
+                                                      ROUTES FOR INSTRUCTOR
+            ******************************************************************************************************** */}
             {
               userData?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
                 <>
@@ -126,6 +138,19 @@ function App() {
             }
 
         </Route>
+
+        <Route element={<PrivateRoute><ViewCourse /></PrivateRoute>}>
+                {
+                  userData?.accountType === ACCOUNT_TYPE.STUDENT && (
+                    <>
+                      <Route
+                        path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                        element={<VideoDetails />}
+                      />
+                    </>
+                  )
+                }
+          </Route>
         
         <Route
           path="*"
