@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 
 // require("dotenv").config();
 const userRoutes = require("./routes/User");
@@ -17,6 +18,10 @@ const PORT = process.env.PORT || 3000;
 //Database Connection
 const db = require("./config/database");
 db.connect();
+
+app.use(cors({
+    origin: 'https://studynotion-frontend-olive-one.vercel.app'
+  }));
 
 //middlewares
 app.use(express.json());
