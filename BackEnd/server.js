@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 
+
 // require("dotenv").config();
 const userRoutes = require("./routes/User");
 const profileRoute = require("./routes/Profile");
@@ -19,9 +20,12 @@ const PORT = process.env.PORT || 3000;
 const db = require("./config/database");
 db.connect();
 
-app.use(cors({
-    origin: 'https://studynotion-frontend-olive-one.vercel.app'
-  }));
+const corsOptions ={
+    origin:'https://studynotion-frontend-bhushans-projects-fa7e4819.vercel.app/', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 //middlewares
 app.use(express.json());
