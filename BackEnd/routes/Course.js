@@ -7,6 +7,9 @@ const { addToCart, removeFromCart } = require("../controllers/Cart")
 //Import Course controller
 const {createCourse,getAllCourses,getCourseDetails,getInstructorCourses,editCourse,deleteCourse,getFullCourseDetails} = require("../controllers/Course");
 
+//Import Course Progress
+const {updateCourseProgress} = require("../controllers/courseProgress")
+
 //Import Category controller
 const {createCategory,showAllCategory,categoryPageDetails} = require("../controllers/Category");
 
@@ -48,6 +51,8 @@ router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 router.post("/editCourse", auth, isInstructor, editCourse)
 router.delete("/deleteCourse", auth, isInstructor, deleteCourse)
 router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+
+router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 
 
 
