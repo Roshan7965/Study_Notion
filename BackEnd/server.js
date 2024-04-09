@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const cors = require('cors');
-
 
 // require("dotenv").config();
 const userRoutes = require("./routes/User");
@@ -20,19 +18,13 @@ const PORT = process.env.PORT || 3000;
 const db = require("./config/database");
 db.connect();
 
-const corsOptions ={
-    origin:'https://studynotion-frontend-bhushans-projects-fa7e4819.vercel.app/', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
 
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin:"http://localhost:3000",
+        origin:"https://studynotion-frontend-bhushans-projects-fa7e4819.vercel.app/",
         credentials:true
     })
 )
