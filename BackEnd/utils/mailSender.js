@@ -13,7 +13,6 @@ const mailSender = async (email, title, body) => {
                     rejectUnauthorized: false
                 }
             })
-            console.log("vfghszdfghhhjjk")
 
             let info = await transporter.sendMail({
                 from: 'StudyNotion || From Bhushan Patil ',
