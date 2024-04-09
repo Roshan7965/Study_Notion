@@ -18,13 +18,12 @@ const PORT = process.env.PORT || 3000;
 const db = require("./config/database");
 db.connect();
 
-
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin:"https://studynotion-frontend-bhushans-projects-fa7e4819.vercel.app/",
+        origin:"http://localhost:3000",
         credentials:true
     })
 )
