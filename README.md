@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # StudyNotion Edtech Project
 
 The **Study Notion EdTech Platform** is a full-stack project developed using the MERN (MongoDB, Express.js, React, Node.js) stack. It is designed to facilitate online learning, allowing students to enroll in courses, instructors to create and manage courses, and interactive features for both instructors and students.
@@ -40,3 +41,6 @@ The **Study Notion EdTech Platform** is a full-stack project developed using the
 - Media Storage: Cloudinary
 - Data Visualization: Chart.js
 - UI Components: React-Stars, Swipe Slider, and more.
+=======
+# Study_Notion
+>>>>>>> b57abf04e98bbfedd66f9d6c3c16cc8f612f98d5
